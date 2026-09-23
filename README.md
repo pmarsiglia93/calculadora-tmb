@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# FitCalc — calculadoras de nutrição e treino
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação React de página única que reúne nove calculadoras de saúde, nutrição e
+performance. O usuário preenche o perfil (sexo, idade, peso, altura, nível de
+atividade e objetivo) uma única vez e todas as ferramentas passam a usar esses
+dados. Nada sai do navegador: não há back-end, API ou coleta de dados.
 
-## Available Scripts
+> Projeto que nasceu como uma calculadora de taxa metabólica basal e foi
+> reescrito para virar uma página completa de ferramentas fitness.
 
-In the project directory, you can run:
+## Calculadoras
 
-### `npm start`
+| Ferramenta | O que entrega | Base |
+| --- | --- | --- |
+| Gasto energético | TMB, GET e calorias para cinco objetivos | Mifflin-St Jeor, Harris-Benedict revisada, Katch-McArdle |
+| Macronutrientes | Gramas e percentuais de proteína, carboidrato e gordura | g/kg de peso corporal, com presets e ajuste fino |
+| IMC | Índice, classificação da OMS e faixa de peso saudável | peso / altura² |
+| Composição corporal | % de gordura, massa magra, cintura-quadril e cintura-estatura | Método da Marinha americana |
+| Peso ideal | Quatro estimativas comparadas com o peso atual | Devine, Robinson, Miller, Hamwi |
+| Hidratação | Meta diária em litros e copos | 35 ml/kg + reposição de treino e clima |
+| Carga máxima (1RM) | 1RM estimado e tabela de percentuais por objetivo | Epley, Brzycki, Lombardi |
+| Zonas de treino | Cinco faixas de frequência cardíaca | Tanaka e Karvonen |
+| Corrida | Pace, velocidade, gasto calórico e previsão de provas | Fórmula de Riegel |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Além das ferramentas, a página traz seis guias explicando como interpretar os
+números e uma seção de dúvidas frequentes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Decisões técnicas
 
-### `npm test`
+- **React 19 + Create React App**, sem nenhuma dependência de UI. Ícones são SVG
+  inline e o layout usa CSS puro com variáveis.
+- **`src/lib/formulas.js`** concentra toda a matemática em funções puras,
+  separada da interface e coberta por testes.
+- **Contexto de perfil** (`src/context/PerfilContext.js`) compartilha os dados
+  entre as calculadoras e persiste em `localStorage`.
+- **Tema claro e escuro** por tokens CSS, com a preferência do sistema como
+  padrão inicial.
+- **Acessibilidade**: campos com `label`, abas com `aria-pressed`/`aria-current`,
+  respeito a `prefers-reduced-motion` e foco visível.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Estrutura
 
-### `npm run build`
+```
+src/
+├── App.js                   # composição da página e troca de tema
+├── lib/
+│   ├── formulas.js          # todas as fórmulas (funções puras)
+│   ├── formulas.test.js     # testes das fórmulas
+│   └── ferramentas.js       # catálogo das calculadoras
+├── context/PerfilContext.js # perfil compartilhado + localStorage
+├── components/
+│   ├── ui/                  # campos, cartões, estatísticas, ícones
+│   └── calculadoras/        # uma calculadora por arquivo
+└── styles/global.css        # tokens, temas e base
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Rodando o projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+npm start     # desenvolvimento em http://localhost:3000
+npm test      # testes das fórmulas e da renderização
+npm run build # build de produção
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Aviso
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+O conteúdo é informativo e usa estimativas populacionais, com margem de erro
+típica de 5% a 15% para um indivíduo específico. Não substitui avaliação médica
+ou nutricional.

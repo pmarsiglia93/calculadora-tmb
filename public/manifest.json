@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "FitCalc",
+  "name": "FitCalc — calculadoras de nutrição e treino",
+  "description": "Gasto energético, macronutrientes, composição corporal, treino e corrida.",
+  "lang": "pt-BR",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +22,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#080a0f",
+  "background_color": "#080a0f"
 }

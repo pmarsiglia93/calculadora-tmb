@@ -1,0 +1,394 @@
+/* ============================ componentes de interface reutilizáveis ====== */
+
+/* ------------------------------------------------------------------ cartão */
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 24px;
+  box-shadow: var(--sombra);
+}
+
+.cartao-titulo {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.cartao-descricao {
+  color: var(--texto-suave);
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+
+/* ------------------------------------------------------------------ campos */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-rotulo {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.campo-dica {
+  font-weight: 500;
+  color: var(--texto-fraco);
+  font-size: 0.75rem;
+}
+
+.campo-controle {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-sm);
+  color: var(--texto);
+  padding: 11px 13px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+  appearance: none;
+}
+
+.campo input::placeholder {
+  color: var(--texto-fraco);
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px rgba(198, 242, 78, 0.16);
+}
+
+.campo input[type="number"]::-webkit-outer-spin-button,
+.campo input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.campo input[type="number"] {
+  appearance: textfield;
+}
+
+.campo-sufixo {
+  position: absolute;
+  right: 12px;
+  font-size: 0.8rem;
+  color: var(--texto-fraco);
+  pointer-events: none;
+}
+
+.campo:has(.campo-sufixo) input {
+  padding-right: 46px;
+}
+
+.campo select {
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--texto-suave) 50%),
+    linear-gradient(135deg, var(--texto-suave) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+}
+
+.campo select option {
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.campo-erro input,
+.campo-erro select {
+  border-color: var(--risco);
+}
+
+.campo-mensagem {
+  font-size: 0.75rem;
+  color: var(--risco);
+}
+
+/* ------------------------------------------------------ controle segmentado */
+.segmentado {
+  display: flex;
+  gap: 4px;
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-sm);
+  padding: 4px;
+}
+
+.segmentado button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--texto-suave);
+  padding: 8px 10px;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transicao);
+  white-space: nowrap;
+}
+
+.segmentado button:hover {
+  color: var(--texto);
+}
+
+.segmentado button[aria-pressed="true"] {
+  background: var(--acento);
+  color: var(--acento-contraste);
+}
+
+/* ------------------------------------------------------------------ slider */
+.deslizante {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  border-radius: var(--raio-pill);
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  cursor: pointer;
+  margin: 6px 0;
+}
+
+.deslizante::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--acento);
+  border: 2px solid var(--fundo);
+  cursor: pointer;
+}
+
+.deslizante::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--acento);
+  border: 2px solid var(--fundo);
+  cursor: pointer;
+}
+
+/* -------------------------------------------------------------- estatística */
+.estatistica {
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-sm);
+  padding: 16px;
+}
+
+.estatistica-rotulo {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-fraco);
+  font-weight: 700;
+}
+
+.estatistica-valor {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-top: 6px;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.estatistica-valor .unidade {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+
+.estatistica-nota {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  margin-top: 4px;
+}
+
+.estatistica.destaque {
+  background: var(--gradiente-suave);
+  border-color: rgba(198, 242, 78, 0.35);
+}
+
+.estatistica.destaque .estatistica-valor {
+  color: var(--acento);
+}
+
+/* --------------------------------------------------------------- distintivo */
+.distintivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: var(--raio-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1px solid currentColor;
+}
+
+.distintivo.bom {
+  color: var(--bom);
+}
+.distintivo.alerta {
+  color: var(--alerta);
+}
+.distintivo.risco {
+  color: var(--risco);
+}
+.distintivo.neutro {
+  color: var(--texto-suave);
+}
+
+/* ------------------------------------------------------- barra de faixas */
+.barra-faixas {
+  margin-top: 18px;
+}
+
+.barra-faixas-trilha {
+  display: flex;
+  height: 10px;
+  border-radius: var(--raio-pill);
+  overflow: hidden;
+  gap: 2px;
+}
+
+.barra-faixas-trilha span {
+  flex: 1;
+  opacity: 0.35;
+  transition: opacity var(--transicao);
+}
+
+.barra-faixas-trilha span.ativa {
+  opacity: 1;
+}
+
+.barra-faixas-trilha .tom-bom {
+  background: var(--bom);
+}
+.barra-faixas-trilha .tom-alerta {
+  background: var(--alerta);
+}
+.barra-faixas-trilha .tom-risco {
+  background: var(--risco);
+}
+
+.barra-faixas-legendas {
+  display: flex;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.barra-faixas-legendas span {
+  flex: 1;
+  font-size: 0.65rem;
+  color: var(--texto-fraco);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.barra-faixas-legendas span.ativa {
+  color: var(--texto);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------- aviso/nota */
+.nota {
+  display: flex;
+  gap: 10px;
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-left: 3px solid var(--acento-2);
+  border-radius: var(--raio-sm);
+  padding: 12px 14px;
+  font-size: 0.83rem;
+  color: var(--texto-suave);
+}
+
+.nota.atencao {
+  border-left-color: var(--alerta);
+}
+
+.nota-icone {
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------- grades */
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.grade-resultados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+/* --------------------------------------------------------------- tabelas */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tabela th {
+  text-align: left;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-fraco);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--borda);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela tbody tr:hover {
+  background: var(--superficie-2);
+}
+
+.rolagem-horizontal {
+  overflow-x: auto;
+  margin: 0 -4px;
+  padding: 0 4px;
+}
+
+.cartao-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cartao-cabecalho > div {
+  min-width: 0;
+}
